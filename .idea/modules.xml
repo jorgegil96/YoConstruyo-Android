@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/YoConstruyo-Android.iml" filepath="$PROJECT_DIR$/YoConstruyo-Android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/YoContruyo-Android.iml" filepath="$PROJECT_DIR$/YoContruyo-Android.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
