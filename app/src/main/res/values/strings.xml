@@ -10,4 +10,9 @@
         Revisa tu conexión a internet.
     </string>
 
+    <string name="error_loading_submodules">
+        Ocurrió un error al cargar el contenido.
+        Revisa tu conexión a internet.
+    </string>
+
 </resources>

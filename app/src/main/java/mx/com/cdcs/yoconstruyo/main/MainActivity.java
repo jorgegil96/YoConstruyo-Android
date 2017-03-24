@@ -1,5 +1,6 @@
 package mx.com.cdcs.yoconstruyo.main;
 
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
@@ -23,6 +24,7 @@ import butterknife.ButterKnife;
 import mx.com.cdcs.yoconstruyo.R;
 import mx.com.cdcs.yoconstruyo.data.service.YoConstruyoService;
 import mx.com.cdcs.yoconstruyo.model.Module;
+import mx.com.cdcs.yoconstruyo.module.ModuleActivity;
 import mx.com.cdcs.yoconstruyo.util.schedulers.SchedulerProvider;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -121,6 +123,7 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onModuleClick(Module module) {
-
+        Intent intent = new Intent(this, ModuleActivity.class);
+        startActivity(intent);
     }
 }
