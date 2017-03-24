@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">YoConstruyo</string>
+
+    <string name="error_loading_modules">
+        Ocurrió un error al cargar el contenido.
+        Revisa tu conexión a internet.
+    </string>
 </resources>
