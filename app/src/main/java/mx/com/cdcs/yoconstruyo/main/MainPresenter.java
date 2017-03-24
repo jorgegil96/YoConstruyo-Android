@@ -59,6 +59,9 @@ public class MainPresenter {
 
     public void stop() {
         view = null;
+        if (disposables != null) {
+            disposables.clear();
+        }
     }
 
     private boolean isViewAttached() {
