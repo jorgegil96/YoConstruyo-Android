@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:id="@+id/layout_submodule">
+
+    <ImageView
+        android:id="@+id/image_submodule"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/submodule"/>
+
+    <ImageView
+        android:id="@+id/image_check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/ic_check_circle_black_24dp"
+        android:tint="@color/checkCompleted"
+        android:padding="10dp"/>
+
+    <TextView
+        android:id="@+id/text_submodule_title"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_toEndOf="@id/image_submodule"
+        android:layout_toStartOf="@id/image_check"
+        android:text="Presentación y alcanes bla bla bla bla"
+        android:textSize="20sp"
+        android:padding="5dp"
+        android:gravity="center_vertical"
+        android:textColor="@color/textPrimary" />
+
+</RelativeLayout>

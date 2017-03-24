@@ -1,3 +1,18 @@
 <resources>
-    <string name="app_name">YoConstruyo</string>
+    <string name="app_name">Yo Construyo</string>
+
+    <string name="action_refresh">Cargar</string>
+    <string name="action_profile">Perfil</string>
+    <string name="action_settings">Ajustes</string>
+
+    <string name="error_loading_modules">
+        Ocurrió un error al cargar el contenido.
+        Revisa tu conexión a internet.
+    </string>
+
+    <string name="error_loading_submodules">
+        Ocurrió un error al cargar el contenido.
+        Revisa tu conexión a internet.
+    </string>
+
 </resources>
