@@ -12,18 +12,18 @@
         android:icon="@drawable/ic_refresh_black_24dp"/>
 
     <item
-        android:id="@+id/action_profile"
-        android:title="@string/action_profile"
-        app:showAsAction="never" />
-
-    <item
-        android:id="@+id/action_settings"
-        android:title="@string/action_settings"
+        android:id="@+id/action_about"
+        android:title="@string/action_about"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/action_logout"
         android:title="@string/action_logout"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_licences"
+        android:title="@string/action_licences"
         app:showAsAction="never" />
 
 </menu>

@@ -94,8 +94,12 @@ public class MainActivity extends AppCompatActivity implements
             case R.id.action_refresh:
                 presenter.loadModules();
                 return true;
+            case R.id.action_about:
+                return true;
             case R.id.action_logout:
                 presenter.logout();
+                return true;
+            case R.id.action_licences:
                 return true;
         }
 
