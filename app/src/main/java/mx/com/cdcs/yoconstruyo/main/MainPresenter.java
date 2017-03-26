@@ -1,9 +1,12 @@
 package mx.com.cdcs.yoconstruyo.main;
 
+import android.util.Log;
+
 import java.util.List;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableSingleObserver;
+import mx.com.cdcs.yoconstruyo.data.AppDataStore;
 import mx.com.cdcs.yoconstruyo.data.service.YoConstruyoService;
 import mx.com.cdcs.yoconstruyo.model.Module;
 import mx.com.cdcs.yoconstruyo.util.schedulers.BaseSchedulerProvider;
@@ -12,13 +15,15 @@ public class MainPresenter {
 
     private MainView view;
     private YoConstruyoService service;
+    private AppDataStore repository;
     private BaseSchedulerProvider schedulerProvider;
     private CompositeDisposable disposables;
 
-    public MainPresenter(MainView view, YoConstruyoService service,
+    public MainPresenter(MainView view, YoConstruyoService service, AppDataStore repository,
                          BaseSchedulerProvider schedulerProvider) {
         this.view = view;
         this.service = service;
+        this.repository = repository;
         this.schedulerProvider = schedulerProvider;
     }
 
@@ -30,7 +35,7 @@ public class MainPresenter {
         view.setLoadingIndicator(true);
         view.hideModules();
         disposables.clear();
-        disposables.add(service.getModules()
+        disposables.add(service.getModules(repository.getToken())
                 .subscribeOn(schedulerProvider.io())
                 .observeOn(schedulerProvider.ui())
                 .subscribeWith(new DisposableSingleObserver<List<Module>>() {
@@ -52,6 +57,7 @@ public class MainPresenter {
                             view.showLoadingErrorToast();
                             view.setLoadingIndicator(false);
                         }
+                        Log.d("Presenter", e.toString());
                     }
                 })
         );

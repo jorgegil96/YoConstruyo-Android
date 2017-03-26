@@ -1,21 +1,26 @@
 package mx.com.cdcs.yoconstruyo.module;
 
+import android.support.v4.app.NavUtils;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import mx.com.cdcs.yoconstruyo.R;
 import mx.com.cdcs.yoconstruyo.data.service.YoConstruyoService;
+import mx.com.cdcs.yoconstruyo.main.MainActivity;
 import mx.com.cdcs.yoconstruyo.model.Submodule;
 import mx.com.cdcs.yoconstruyo.util.schedulers.SchedulerProvider;
 import retrofit2.Retrofit;
@@ -30,20 +35,25 @@ public class ModuleActivity extends AppCompatActivity implements
     private ModulePresenter presenter;
     private SubmoduleAdapter submoduleAdapter;
 
+    private int moduleId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_module);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ButterKnife.bind(this);
+
+        moduleId = getIntent().getIntExtra(MainActivity.MODULE_ID, 0);
 
         swipeRefreshLayout.setOnRefreshListener(this);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        submoduleAdapter = new SubmoduleAdapter(this, null, this);
+        submoduleAdapter = new SubmoduleAdapter(this, new ArrayList<Submodule>(), this);
         recyclerView.setAdapter(submoduleAdapter);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://www.google.com/")
+                .baseUrl("http://cdcs.com.mx/cursos/api/v1/")
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
@@ -52,7 +62,17 @@ public class ModuleActivity extends AppCompatActivity implements
 
         presenter = new ModulePresenter(this, service, SchedulerProvider.getInstance());
         presenter.start();
-        presenter.loadSubmodules("id");
+        presenter.loadSubmodules(moduleId);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -63,7 +83,7 @@ public class ModuleActivity extends AppCompatActivity implements
 
     @Override
     public void onRefresh() {
-        presenter.loadSubmodules("id");
+        presenter.loadSubmodules(moduleId);
     }
 
     @Override

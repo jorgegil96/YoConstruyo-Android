@@ -15,4 +15,13 @@
         Revisa tu conexión a internet.
     </string>
 
+    <string name="hint_email">Correo electrónico</string>
+    <string name="hint_password">Contraseña</string>
+    <string name="action_login">Iniciar sesión</string>
+    <string name="action_sign_up">Registrarse</string>
+    <string name="action_forgot_password">Olvide mi contraseña</string>
+
+    <string name="login_error">Ocurrió un error al iniciar sesión. Intenta de nuevo más tarde</string>
+    <string name="invalid_credentials">Email o contraseña incorrecta.</string>
+
 </resources>

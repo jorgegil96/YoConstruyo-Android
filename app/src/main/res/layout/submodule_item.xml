@@ -28,7 +28,7 @@
         android:layout_height="match_parent"
         android:layout_toEndOf="@id/image_submodule"
         android:layout_toStartOf="@id/image_check"
-        android:text="Presentación y alcanes bla bla bla bla"
+        android:text="Presentación y"
         android:textSize="20sp"
         android:padding="5dp"
         android:gravity="center_vertical"

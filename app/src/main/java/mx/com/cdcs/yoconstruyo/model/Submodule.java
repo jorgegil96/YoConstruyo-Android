@@ -2,24 +2,34 @@ package mx.com.cdcs.yoconstruyo.model;
 
 public class Submodule {
 
-    private String id;
+    private int id;
+    private int index;
     private String title;
-    private String image;
-    private boolean complete;
+    private String thumbnail;
+    private boolean completed;
 
-    public Submodule(String id, String title, String image, boolean complete) {
+    public Submodule(int id, int index, String title, String thumbnail, boolean completed) {
         this.id = id;
+        this.index = index;
         this.title = title;
-        this.image = image;
-        this.complete = complete;
+        this.thumbnail = thumbnail;
+        this.completed = completed;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
     }
 
     public String getTitle() {
@@ -30,19 +40,19 @@ public class Submodule {
         this.title = title;
     }
 
-    public String getImage() {
-        return image;
+    public String getThumbnail() {
+        return thumbnail;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
     }
 
-    public boolean isComplete() {
-        return complete;
+    public boolean isCompleted() {
+        return completed;
     }
 
-    public void setComplete(boolean complete) {
-        this.complete = complete;
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
     }
 }

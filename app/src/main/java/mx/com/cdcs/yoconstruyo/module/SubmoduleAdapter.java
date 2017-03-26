@@ -35,7 +35,7 @@ public class SubmoduleAdapter extends RecyclerView.Adapter<SubmoduleAdapter.View
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.module_item, parent, false);
+                .inflate(R.layout.submodule_item, parent, false);
 
         return new ViewHolder(view);
     }
@@ -44,9 +44,9 @@ public class SubmoduleAdapter extends RecyclerView.Adapter<SubmoduleAdapter.View
     public void onBindViewHolder(ViewHolder holder, int i) {
         final Submodule submodule = submodules.get(i);
 
-        Picasso.with(context).load(submodule.getImage()).into(holder.ivImage);
+        Picasso.with(context).load(submodule.getThumbnail()).into(holder.ivImage);
         holder.tvTitle.setText(submodule.getTitle());
-        if (submodule.isComplete()) {
+        if (submodule.isCompleted()) {
             holder.ivCheck.setColorFilter(ContextCompat.getColor(context, R.color.checkCompleted));
         } else {
             holder.ivCheck.setColorFilter(ContextCompat.getColor(context, R.color.checkNormal));
