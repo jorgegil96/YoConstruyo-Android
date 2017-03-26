@@ -1,12 +1,5 @@
 package mx.com.cdcs.yoconstruyo.login;
 
-import android.util.Log;
-
-import com.google.gson.Gson;
-import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
-
-import java.io.IOException;
-
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.observers.DisposableSingleObserver;
@@ -14,7 +7,6 @@ import mx.com.cdcs.yoconstruyo.data.AppDataStore;
 import mx.com.cdcs.yoconstruyo.data.service.YoConstruyoService;
 import mx.com.cdcs.yoconstruyo.model.LoginResponse;
 import mx.com.cdcs.yoconstruyo.util.schedulers.BaseSchedulerProvider;
-import okhttp3.ResponseBody;
 
 public class LoginPresenter {
 
