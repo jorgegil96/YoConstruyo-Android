@@ -19,6 +19,10 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import mx.com.cdcs.yoconstruyo.R;
+import mx.com.cdcs.yoconstruyo.data.AppDataStore;
+import mx.com.cdcs.yoconstruyo.data.AppRepository;
+import mx.com.cdcs.yoconstruyo.data.local.AppLocalDataStore;
+import mx.com.cdcs.yoconstruyo.data.local.MySharedPreferences;
 import mx.com.cdcs.yoconstruyo.data.service.YoConstruyoService;
 import mx.com.cdcs.yoconstruyo.main.MainActivity;
 import mx.com.cdcs.yoconstruyo.model.Submodule;
@@ -44,6 +48,8 @@ public class ModuleActivity extends AppCompatActivity implements
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ButterKnife.bind(this);
 
+        setTitle(getIntent().getStringExtra(MainActivity.MODULE_TITLE));
+
         moduleId = getIntent().getIntExtra(MainActivity.MODULE_ID, 0);
 
         swipeRefreshLayout.setOnRefreshListener(this);
@@ -59,8 +65,10 @@ public class ModuleActivity extends AppCompatActivity implements
                 .build();
 
         YoConstruyoService service = retrofit.create(YoConstruyoService.class);
+        AppDataStore repository = AppRepository.getInstance(AppLocalDataStore.getInstance(
+                getSharedPreferences(MySharedPreferences.MY_PREFERENCES, MODE_PRIVATE)));
 
-        presenter = new ModulePresenter(this, service, SchedulerProvider.getInstance());
+        presenter = new ModulePresenter(this, service, repository, SchedulerProvider.getInstance());
         presenter.start();
         presenter.loadSubmodules(moduleId);
     }

@@ -48,13 +48,12 @@ public class ModuleAdapter extends RecyclerView.Adapter<ModuleAdapter.ViewHolder
 
         Picasso.with(context).load(BASE_URL + module.getThumbnail())
                 .placeholder(R.drawable.module)
-                .memoryPolicy(MemoryPolicy.NO_CACHE)
                 .into(holder.ivImage);
         holder.tvTitle.setText(module.getTitle());
         if (module.isCompleted()) {
-            holder.ivCheck.setColorFilter(ContextCompat.getColor(context, R.color.checkCompleted));
+            holder.ivCheck.setVisibility(View.VISIBLE);
         } else {
-            holder.ivCheck.setColorFilter(ContextCompat.getColor(context, R.color.checkNormal));
+            holder.ivCheck.setVisibility(View.INVISIBLE);
         }
 
         holder.cardModule.setOnClickListener(new View.OnClickListener() {

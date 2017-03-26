@@ -32,6 +32,9 @@ public class MainPresenter {
     }
 
     public void loadModules() {
+        Log.d("Presenter", "email: " + repository.getEmail());
+        Log.d("Presenter", "token: " + repository.getToken());
+
         view.setLoadingIndicator(true);
         view.hideModules();
         disposables.clear();

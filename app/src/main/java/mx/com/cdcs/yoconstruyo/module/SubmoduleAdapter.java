@@ -21,6 +21,8 @@ import mx.com.cdcs.yoconstruyo.model.Submodule;
 
 public class SubmoduleAdapter extends RecyclerView.Adapter<SubmoduleAdapter.ViewHolder> {
 
+    private static final String BASE_URL = "http://cdcs.com.mx/cursos/";
+
     private Context context;
     private List<Submodule> submodules;
     private OnSubmoduleClickListener listener;
@@ -44,12 +46,12 @@ public class SubmoduleAdapter extends RecyclerView.Adapter<SubmoduleAdapter.View
     public void onBindViewHolder(ViewHolder holder, int i) {
         final Submodule submodule = submodules.get(i);
 
-        Picasso.with(context).load(submodule.getThumbnail()).into(holder.ivImage);
+        Picasso.with(context).load(BASE_URL + submodule.getThumbnail()).into(holder.ivImage);
         holder.tvTitle.setText(submodule.getTitle());
         if (submodule.isCompleted()) {
-            holder.ivCheck.setColorFilter(ContextCompat.getColor(context, R.color.checkCompleted));
+            holder.ivCheck.setVisibility(View.VISIBLE);
         } else {
-            holder.ivCheck.setColorFilter(ContextCompat.getColor(context, R.color.checkNormal));
+            holder.ivCheck.setVisibility(View.INVISIBLE);
         }
 
         holder.layoutSubmodule.setOnClickListener(new View.OnClickListener() {

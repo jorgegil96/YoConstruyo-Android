@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements
         SwipeRefreshLayout.OnRefreshListener, MainView, OnModuleClickListener {
 
     public static final String MODULE_ID = "moduleId";
+    public static final String MODULE_TITLE = "moduleTitle";
 
     @BindView(R.id.swipeRefreshLayout) SwipeRefreshLayout swipeRefreshLayout;
     @BindView(R.id.recyclerView) RecyclerView recyclerView;
@@ -149,6 +150,7 @@ public class MainActivity extends AppCompatActivity implements
     public void onModuleClick(Module module) {
         Intent intent = new Intent(this, ModuleActivity.class);
         intent.putExtra(MODULE_ID, module.getId());
+        intent.putExtra(MODULE_TITLE, module.getTitle());
         startActivity(intent);
     }
 }

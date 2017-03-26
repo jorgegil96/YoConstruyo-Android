@@ -7,9 +7,10 @@ public class Module {
     private String title;
     private String thumbnail;
     private boolean completed;
-    private boolean visible;
+    private int visible;
 
-    public Module(int id, int index, String title, String thumbnail, boolean completed, boolean visible) {
+    public Module(int id, int index, String title, String thumbnail, boolean completed,
+                  int visible) {
         this.id = id;
         this.index = index;
         this.title = title;
@@ -58,11 +59,11 @@ public class Module {
         this.completed = completed;
     }
 
-    public boolean isVisible() {
+    public int getVisible() {
         return visible;
     }
 
-    public void setVisible(boolean visible) {
+    public void setVisible(int visible) {
         this.visible = visible;
     }
 }
