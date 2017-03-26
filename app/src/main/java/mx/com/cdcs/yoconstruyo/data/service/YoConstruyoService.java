@@ -2,6 +2,7 @@ package mx.com.cdcs.yoconstruyo.data.service;
 
 import java.util.List;
 
+import io.reactivex.Completable;
 import io.reactivex.Single;
 import mx.com.cdcs.yoconstruyo.model.LoginResponse;
 import mx.com.cdcs.yoconstruyo.model.Module;
@@ -31,8 +32,8 @@ public interface YoConstruyoService {
                                   @Field("email") String email,
                                   @Field("password") String password,
                                   @Field("password_confirmation") String passwordConfirmation,
-                                  @Field("gender") String gender,
-                                  @Field("dob") String dob,
+                                  @Field("gender") String gender, // male or female
+                                  @Field("dob") String dob, //yyyy/mm/dd
                                   @Field("country") String country,
                                   @Field("state") String state,
                                   @Field("city") String city,
@@ -42,6 +43,11 @@ public interface YoConstruyoService {
     @POST("authenticate")
     Single<LoginResponse> login(@Field("email") String email,
                                 @Field("password") String password);
+
+    @FormUrlEncoded
+    @POST("progress")
+    Completable saveProgress(@Field("sub_module_id") String submoduleId,
+                             @Field("token") String token);
 
 
 }

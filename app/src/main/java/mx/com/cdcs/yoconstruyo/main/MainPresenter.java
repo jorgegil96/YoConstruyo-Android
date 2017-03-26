@@ -63,6 +63,14 @@ public class MainPresenter {
         );
     }
 
+    public void logout() {
+        repository.saveEmail("");
+        repository.saveToken("");
+        if (isViewAttached()) {
+            view.startLoginActivity();
+        }
+    }
+
     public void stop() {
         view = null;
         if (disposables != null) {

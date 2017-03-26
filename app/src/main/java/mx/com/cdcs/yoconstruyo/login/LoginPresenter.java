@@ -1,5 +1,7 @@
 package mx.com.cdcs.yoconstruyo.login;
 
+import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
+
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.observers.DisposableSingleObserver;
@@ -9,6 +11,8 @@ import mx.com.cdcs.yoconstruyo.model.LoginResponse;
 import mx.com.cdcs.yoconstruyo.util.schedulers.BaseSchedulerProvider;
 
 public class LoginPresenter {
+
+    private static final int ERROR_CODE_UNAUTHORIZED = 401;
 
     private LoginView view;
     private YoConstruyoService service;
@@ -50,8 +54,20 @@ public class LoginPresenter {
 
                     @Override
                     public void onError(Throwable t) {
+                        if (t instanceof HttpException) {
+                            HttpException httpException = (HttpException) t;
+                            if (httpException.code() == ERROR_CODE_UNAUTHORIZED) {
+                                if (isViewAttached()) {
+                                    view.showInvalidCredentialsMessage(t.getMessage());
+                                    view.setLoadingIndicator(false);
+                                    view.showLoginForm();
+                                    return;
+                                }
+                            }
+                        }
+
                         if (isViewAttached()) {
-                            view.showInvalidCredentialsMessage(t.getMessage());
+                            view.showLoginErrorMessage();
                             view.setLoadingIndicator(false);
                             view.showLoginForm();
                         }

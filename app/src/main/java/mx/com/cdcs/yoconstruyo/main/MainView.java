@@ -13,4 +13,6 @@ public interface MainView {
     void hideModules();
 
     void showLoadingErrorToast();
+
+    void startLoginActivity();
 }
