@@ -46,7 +46,6 @@ public class LoginPresenter {
                     public void accept(LoginResponse response) throws Exception {
                         repository.saveEmail(email);
                         repository.saveToken(response.getToken());
-                        Log.d("Login", "token: " + response.getToken());
                     }
                 })
                 .subscribeWith(new DisposableSingleObserver<LoginResponse>() {
@@ -59,7 +58,11 @@ public class LoginPresenter {
 
                     @Override
                     public void onError(Throwable t) {
-
+                        if (isViewAttached()) {
+                            view.showInvalidCredentialsMessage(t.getMessage());
+                            view.setLoadingIndicator(false);
+                            view.showLoginForm();
+                        }
                     }
                 })
         );
