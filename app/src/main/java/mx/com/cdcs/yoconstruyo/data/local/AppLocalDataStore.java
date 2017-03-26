@@ -23,21 +23,25 @@ public class AppLocalDataStore implements AppDataStore {
 
     @Override
     public void saveToken(String token) {
-
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(MySharedPreferences.TOKEN_KEY, token);
+        editor.apply();
     }
 
     @Override
     public void saveEmail(String email) {
-
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(MySharedPreferences.EMAIL_KEY, email);
+        editor.apply();
     }
 
     @Override
     public String getToken() {
-        return null;
+        return sharedPreferences.getString(MySharedPreferences.TOKEN_KEY, null);
     }
 
     @Override
     public String getEmail() {
-        return null;
+        return sharedPreferences.getString(MySharedPreferences.EMAIL_KEY, null);
     }
 }

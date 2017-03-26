@@ -19,21 +19,21 @@ public class AppRepository implements AppDataStore {
 
     @Override
     public void saveToken(String token) {
-
+        localDataStore.saveToken(token);
     }
 
     @Override
     public void saveEmail(String email) {
-
+        localDataStore.saveEmail(email);
     }
 
     @Override
     public String getToken() {
-        return null;
+        return localDataStore.getToken();
     }
 
     @Override
     public String getEmail() {
-        return null;
+        return localDataStore.getEmail();
     }
 }

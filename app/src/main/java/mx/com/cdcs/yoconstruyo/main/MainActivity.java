@@ -28,6 +28,7 @@ import mx.com.cdcs.yoconstruyo.data.AppRepository;
 import mx.com.cdcs.yoconstruyo.data.local.AppLocalDataStore;
 import mx.com.cdcs.yoconstruyo.data.local.MySharedPreferences;
 import mx.com.cdcs.yoconstruyo.data.service.YoConstruyoService;
+import mx.com.cdcs.yoconstruyo.login.LoginActivity;
 import mx.com.cdcs.yoconstruyo.model.Module;
 import mx.com.cdcs.yoconstruyo.module.ModuleActivity;
 import mx.com.cdcs.yoconstruyo.util.schedulers.SchedulerProvider;
@@ -93,6 +94,13 @@ public class MainActivity extends AppCompatActivity implements
             case R.id.action_refresh:
                 presenter.loadModules();
                 return true;
+            case R.id.action_about:
+                return true;
+            case R.id.action_logout:
+                presenter.logout();
+                return true;
+            case R.id.action_licences:
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -128,6 +136,13 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void showLoadingErrorToast() {
         Toast.makeText(this, R.string.error_loading_modules, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void startLoginActivity() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     @Override

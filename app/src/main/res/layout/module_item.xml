@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:text="Muros"
             style="@style/Base.TextAppearance.AppCompat.Body1"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:padding="5dp"
             android:layout_below="@id/image_module" />
 
