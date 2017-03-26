@@ -17,11 +17,16 @@ import android.widget.Toast;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import mx.com.cdcs.yoconstruyo.R;
+import mx.com.cdcs.yoconstruyo.data.AppDataStore;
+import mx.com.cdcs.yoconstruyo.data.AppRepository;
+import mx.com.cdcs.yoconstruyo.data.local.AppLocalDataStore;
+import mx.com.cdcs.yoconstruyo.data.local.MySharedPreferences;
 import mx.com.cdcs.yoconstruyo.data.service.YoConstruyoService;
 import mx.com.cdcs.yoconstruyo.model.Module;
 import mx.com.cdcs.yoconstruyo.module.ModuleActivity;
@@ -31,6 +36,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity implements
         SwipeRefreshLayout.OnRefreshListener, MainView, OnModuleClickListener {
+
+    public static final String MODULE_ID = "moduleId";
 
     @BindView(R.id.swipeRefreshLayout) SwipeRefreshLayout swipeRefreshLayout;
     @BindView(R.id.recyclerView) RecyclerView recyclerView;
@@ -47,18 +54,20 @@ public class MainActivity extends AppCompatActivity implements
         swipeRefreshLayout.setOnRefreshListener(this);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        moduleAdapter = new ModuleAdapter(this, null, this);
+        moduleAdapter = new ModuleAdapter(this, new ArrayList<Module>(), this);
         recyclerView.setAdapter(moduleAdapter);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://www.google.com/")
+                .baseUrl("http://cdcs.com.mx/cursos/api/v1/")
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         YoConstruyoService service = retrofit.create(YoConstruyoService.class);
+        AppDataStore repository = AppRepository.getInstance(AppLocalDataStore.getInstance(
+                getSharedPreferences(MySharedPreferences.MY_PREFERENCES, MODE_PRIVATE)));
 
-        presenter = new MainPresenter(this, service, SchedulerProvider.getInstance());
+        presenter = new MainPresenter(this, service, repository, SchedulerProvider.getInstance());
         presenter.start();
         presenter.loadModules();
     }
@@ -124,6 +133,7 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onModuleClick(Module module) {
         Intent intent = new Intent(this, ModuleActivity.class);
+        intent.putExtra(MODULE_ID, module.getId());
         startActivity(intent);
     }
 }

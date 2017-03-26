@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -20,6 +21,8 @@ import mx.com.cdcs.yoconstruyo.R;
 import mx.com.cdcs.yoconstruyo.model.Module;
 
 public class ModuleAdapter extends RecyclerView.Adapter<ModuleAdapter.ViewHolder> {
+
+    private static final String BASE_URL = "http://cdcs.com.mx/cursos/";
 
     private Context context;
     private List<Module> modules;
@@ -43,9 +46,12 @@ public class ModuleAdapter extends RecyclerView.Adapter<ModuleAdapter.ViewHolder
     public void onBindViewHolder(ViewHolder holder, int i) {
         final Module module = modules.get(i);
 
-        Picasso.with(context).load(module.getImage()).into(holder.ivImage);
+        Picasso.with(context).load(BASE_URL + module.getThumbnail())
+                .placeholder(R.drawable.module)
+                .memoryPolicy(MemoryPolicy.NO_CACHE)
+                .into(holder.ivImage);
         holder.tvTitle.setText(module.getTitle());
-        if (module.isComplete()) {
+        if (module.isCompleted()) {
             holder.ivCheck.setColorFilter(ContextCompat.getColor(context, R.color.checkCompleted));
         } else {
             holder.ivCheck.setColorFilter(ContextCompat.getColor(context, R.color.checkNormal));

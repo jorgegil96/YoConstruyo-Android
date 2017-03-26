@@ -1,26 +1,30 @@
-package mx.com.cdcs.yoconstruyo.main;
+package mx.com.cdcs.yoconstruyo.login;
 
 import android.util.Log;
 
-import java.util.List;
+import com.google.gson.Gson;
+import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
+
+import java.io.IOException;
 
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Consumer;
 import io.reactivex.observers.DisposableSingleObserver;
 import mx.com.cdcs.yoconstruyo.data.AppDataStore;
 import mx.com.cdcs.yoconstruyo.data.service.YoConstruyoService;
-import mx.com.cdcs.yoconstruyo.model.Module;
+import mx.com.cdcs.yoconstruyo.model.LoginResponse;
 import mx.com.cdcs.yoconstruyo.util.schedulers.BaseSchedulerProvider;
+import okhttp3.ResponseBody;
 
-public class MainPresenter {
+public class LoginPresenter {
 
-    private MainView view;
+    private LoginView view;
     private YoConstruyoService service;
     private AppDataStore repository;
     private BaseSchedulerProvider schedulerProvider;
     private CompositeDisposable disposables;
 
-    public MainPresenter(MainView view, YoConstruyoService service, AppDataStore repository,
-                         BaseSchedulerProvider schedulerProvider) {
+    public LoginPresenter(LoginView view, YoConstruyoService service, AppDataStore repository, BaseSchedulerProvider schedulerProvider) {
         this.view = view;
         this.service = service;
         this.repository = repository;
@@ -31,36 +35,41 @@ public class MainPresenter {
         disposables = new CompositeDisposable();
     }
 
-    public void loadModules() {
+    public void login(final String email, String password) {
+        view.hideLoginForm();
         view.setLoadingIndicator(true);
-        view.hideModules();
-        disposables.clear();
-        disposables.add(service.getModules(repository.getToken())
+        disposables.add(service.login(email, password)
                 .subscribeOn(schedulerProvider.io())
                 .observeOn(schedulerProvider.ui())
-                .subscribeWith(new DisposableSingleObserver<List<Module>>() {
+                .doOnSuccess(new Consumer<LoginResponse>() {
                     @Override
-                    public void onSuccess(List<Module> modules) {
+                    public void accept(LoginResponse response) throws Exception {
+                        repository.saveEmail(email);
+                        repository.saveToken(response.getToken());
+                    }
+                })
+                .subscribeWith(new DisposableSingleObserver<LoginResponse>() {
+                    @Override
+                    public void onSuccess(LoginResponse response) {
                         if (isViewAttached()) {
-                            if (!modules.isEmpty()) {
-                                view.showModules(modules);
-                            } else {
-                                view.showLoadingErrorToast();
-                            }
-                            view.setLoadingIndicator(false);
+                            view.startMainActivity();
                         }
                     }
 
                     @Override
-                    public void onError(Throwable e) {
+                    public void onError(Throwable t) {
                         if (isViewAttached()) {
-                            view.showLoadingErrorToast();
+                            view.showInvalidCredentialsMessage(t.getMessage());
                             view.setLoadingIndicator(false);
+                            view.showLoginForm();
                         }
-                        Log.d("Presenter", e.toString());
                     }
                 })
         );
+    }
+
+    public void signUp() {
+
     }
 
     public void stop() {
