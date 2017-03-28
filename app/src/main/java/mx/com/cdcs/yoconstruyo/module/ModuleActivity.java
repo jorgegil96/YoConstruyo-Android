@@ -1,12 +1,12 @@
 package mx.com.cdcs.yoconstruyo.module;
 
-import android.support.v4.app.NavUtils;
+import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Menu;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -14,7 +14,9 @@ import android.widget.Toast;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,12 +28,17 @@ import mx.com.cdcs.yoconstruyo.data.local.MySharedPreferences;
 import mx.com.cdcs.yoconstruyo.data.service.YoConstruyoService;
 import mx.com.cdcs.yoconstruyo.main.MainActivity;
 import mx.com.cdcs.yoconstruyo.model.Submodule;
+import mx.com.cdcs.yoconstruyo.submoduledetail.DetailActivity;
 import mx.com.cdcs.yoconstruyo.util.schedulers.SchedulerProvider;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ModuleActivity extends AppCompatActivity implements
         SwipeRefreshLayout.OnRefreshListener, ModuleView, OnSubmoduleClickListener {
+
+    public static final String SUB_MODULE_ID = "subModuleId";
+    public static final String SUB_MODULE_TITLES = "subModuleTitles";
+    public static final String SUB_MODULE_INDEXES = "subModuleIndexes";
 
     @BindView(R.id.swipeRefreshLayout) SwipeRefreshLayout swipeRefreshLayout;
     @BindView(R.id.recyclerView) RecyclerView recyclerView;
@@ -96,7 +103,18 @@ public class ModuleActivity extends AppCompatActivity implements
 
     @Override
     public void onSubmoduleClick(Submodule submodule) {
+        presenter.subModuleClick(submodule);
+    }
 
+    @Override
+    public void startDetailActivity(Submodule submodule, Map<Integer, String> subModulesTitles,
+                                    Map<Integer, Integer> subModulesIndexes) {
+        Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra(SUB_MODULE_INDEXES, (HashMap) subModulesIndexes);
+        intent.putExtra(SUB_MODULE_TITLES, (HashMap) subModulesTitles);
+        intent.putExtra(MainActivity.MODULE_ID, moduleId);
+        intent.putExtra(SUB_MODULE_ID, submodule.getId());
+        startActivity(intent);
     }
 
     @Override

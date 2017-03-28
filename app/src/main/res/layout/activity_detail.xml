@@ -4,49 +4,70 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#EEEEEE"
     tools:context="mx.com.cdcs.yoconstruyo.submoduledetail.DetailActivity">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="400dp">
-
-
-
-            </LinearLayout>
-
-            <LinearLayout
+            <RelativeLayout
+                android:id="@+id/layout_webview_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="2">
+                android:orientation="vertical">
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Anterior"
-                    android:layout_weight="1"
-                    android:padding="20dp"
-                    style="@style/Widget.AppCompat.Button.Colored"/>
+                <FrameLayout
+                    android:id="@+id/frame_webview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Siguiente"
-                    android:layout_weight="1"
-                    android:padding="20dp"
-                    style="@style/Widget.AppCompat.Button.Colored"/>
-            </LinearLayout>
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentTop="true">
 
-        </LinearLayout>
+                        <WebView
+                            android:id="@+id/webView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </FrameLayout>
+
+                </FrameLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_buttons"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/frame_webview"
+                    android:orientation="horizontal"
+                    android:gravity="bottom"
+                    android:layout_centerInParent="true"
+                    android:weightSum="2">
+
+                    <Button
+                        android:id="@+id/button_left"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Anterior"
+                        android:layout_weight="1"
+                        android:padding="20dp"
+                        style="@style/Widget.AppCompat.Button.Colored"
+                        android:visibility="invisible"/>
+
+                    <Button
+                        android:id="@+id/button_right"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Siguiente"
+                        android:layout_weight="1"
+                        android:padding="20dp"
+                        style="@style/Widget.AppCompat.Button.Colored"
+                        android:visibility="invisible"/>
+                </LinearLayout>
+
+            </RelativeLayout>
 
     </ScrollView>
 

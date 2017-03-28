@@ -1,6 +1,7 @@
 package mx.com.cdcs.yoconstruyo.module;
 
 import java.util.List;
+import java.util.Map;
 
 import mx.com.cdcs.yoconstruyo.model.Submodule;
 
@@ -13,4 +14,7 @@ public interface ModuleView {
     void hideSubmodules();
 
     void showLoadingErrorToast();
+
+    void startDetailActivity(Submodule submodule, Map<Integer, String> subModulesTitles,
+                             Map<Integer, Integer> subModulesIndexes);
 }
