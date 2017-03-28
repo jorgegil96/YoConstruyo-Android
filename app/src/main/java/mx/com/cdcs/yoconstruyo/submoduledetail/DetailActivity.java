@@ -1,6 +1,7 @@
 package mx.com.cdcs.yoconstruyo.submoduledetail;
 
 import android.content.Intent;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +23,7 @@ import mx.com.cdcs.yoconstruyo.module.ModuleActivity;
 
 public class DetailActivity extends AppCompatActivity {
 
+    @BindView(R.id.swipeRefreshLayout) SwipeRefreshLayout swipeRefreshLayout;
     @BindView(R.id.webView) WebView webView;
     @BindView(R.id.button_left) Button btnLeft;
     @BindView(R.id.button_right) Button btnRight;
@@ -38,6 +40,8 @@ public class DetailActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ButterKnife.bind(this);
 
+        swipeRefreshLayout.setRefreshing(true);
+
         moduleId = getIntent().getIntExtra(MainActivity.MODULE_ID, -1);
         subModuleId = getIntent().getIntExtra(ModuleActivity.SUB_MODULE_ID, -1);
 
@@ -52,8 +56,6 @@ public class DetailActivity extends AppCompatActivity {
             return;
         }
 
-        btnLeft.setVisibility(View.INVISIBLE);
-        btnRight.setVisibility(View.INVISIBLE);
         if (subModulesIndexes.get(subModuleId) > 1) {
             btnLeft.setText("Anterior");
         } else {
@@ -78,6 +80,9 @@ public class DetailActivity extends AppCompatActivity {
                 super.onPageFinished(view, url);
                 btnLeft.setVisibility(View.VISIBLE);
                 btnRight.setVisibility(View.VISIBLE);
+                webView.setVisibility(View.VISIBLE);
+                swipeRefreshLayout.setEnabled(false);
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
         webView.getSettings().setJavaScriptEnabled(true);
