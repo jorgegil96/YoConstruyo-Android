@@ -26,5 +26,7 @@
 
     <string name="login_error">Ocurrió un error al iniciar sesión. Intenta de nuevo más tarde</string>
     <string name="invalid_credentials">Email o contraseña incorrecta.</string>
+    <string name="iniciando_sesion">Iniciando sesión</string>
+    <string name="porfavor_espera">Por favor espera</string>
 
 </resources>

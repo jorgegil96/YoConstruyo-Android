@@ -32,7 +32,6 @@ public class LoginPresenter {
     }
 
     public void login(final String email, String password) {
-        view.hideLoginForm();
         view.setLoadingIndicator(true);
         disposables.add(service.login(email, password)
                 .subscribeOn(schedulerProvider.io())
@@ -60,7 +59,6 @@ public class LoginPresenter {
                                 if (isViewAttached()) {
                                     view.showInvalidCredentialsMessage(t.getMessage());
                                     view.setLoadingIndicator(false);
-                                    view.showLoginForm();
                                     return;
                                 }
                             }
@@ -69,7 +67,6 @@ public class LoginPresenter {
                         if (isViewAttached()) {
                             view.showLoginErrorMessage();
                             view.setLoadingIndicator(false);
-                            view.showLoginForm();
                         }
                     }
                 })

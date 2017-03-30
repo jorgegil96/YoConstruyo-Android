@@ -11,6 +11,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import butterknife.BindView;
@@ -39,12 +40,19 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     @BindView(R.id.progressBar) ProgressBar progressBar;
 
     private LoginPresenter presenter;
+    private MaterialDialog loadingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+
+        loadingDialog = new MaterialDialog.Builder(this)
+                .title(R.string.iniciando_sesion)
+                .content(R.string.porfavor_espera)
+                .progress(true, 0)
+                .build();
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://cdcs.com.mx/cursos/api/v1/")
@@ -79,37 +87,15 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     @Override
     public void setLoadingIndicator(boolean active) {
         if (active) {
-            progressBar.setVisibility(View.VISIBLE);
+            loadingDialog.show();
         } else {
-            progressBar.setVisibility(View.INVISIBLE);
+            loadingDialog.dismiss();
         }
     }
 
     @Override
     public void showLoginErrorMessage() {
         Toast.makeText(this, R.string.login_error, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void hideLoginForm() {
-        etEmail.setVisibility(View.INVISIBLE);
-        etPassword.setVisibility(View.INVISIBLE);
-        btnLogin.setVisibility(View.INVISIBLE);
-        tvSignUp.setVisibility(View.INVISIBLE);
-        tvForgotPassword.setVisibility(View.INVISIBLE);
-        tilEmail.setVisibility(View.INVISIBLE);
-        tilPassword.setVisibility(View.INVISIBLE);
-    }
-
-    @Override
-    public void showLoginForm() {
-        etEmail.setVisibility(View.VISIBLE);
-        etPassword.setVisibility(View.VISIBLE);
-        btnLogin.setVisibility(View.VISIBLE);
-        tvSignUp.setVisibility(View.VISIBLE);
-        tvForgotPassword.setVisibility(View.VISIBLE);
-        tilEmail.setVisibility(View.VISIBLE);
-        tilPassword.setVisibility(View.VISIBLE);
     }
 
     @Override

@@ -6,10 +6,6 @@ public interface LoginView {
 
     void showLoginErrorMessage();
 
-    void hideLoginForm();
-
-    void showLoginForm();
-
     void showInvalidCredentialsMessage(String errorMessage);
 
     void startMainActivity();
