@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "707435665489",
+    "firebase_url": "https://yocontruyo-e31e9.firebaseio.com",
+    "project_id": "yocontruyo-e31e9",
+    "storage_bucket": "yocontruyo-e31e9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:707435665489:android:e23e2af05822ddb4",
+        "android_client_info": {
+          "package_name": "mx.com.cdcs.yoconstruyo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "707435665489-5oufcaursam1pp69lpbeuqqaoit95nma.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mx.com.cdcs.yoconstruyo",
+            "certificate_hash": "3178b10965d8367d2a9bc83aa8d69d42016cfb33"
+          }
+        },
+        {
+          "client_id": "707435665489-sq905hk7rerq6kgatqeljp6roii80p7l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6QGn6csQlgyjkCzPcvh2zhCrHe_JrV7o"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "707435665489-sq905hk7rerq6kgatqeljp6roii80p7l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
