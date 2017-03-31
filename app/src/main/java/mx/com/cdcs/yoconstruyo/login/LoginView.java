@@ -10,4 +10,6 @@ public interface LoginView {
 
     void startMainActivity();
 
+    void startSignUpActivity();
+
 }

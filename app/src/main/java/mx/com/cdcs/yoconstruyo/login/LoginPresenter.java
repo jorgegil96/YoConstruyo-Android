@@ -74,7 +74,7 @@ public class LoginPresenter {
     }
 
     public void signUp() {
-
+        view.startSignUpActivity();
     }
 
     public void stop() {

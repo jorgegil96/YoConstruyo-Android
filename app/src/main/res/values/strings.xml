@@ -20,13 +20,43 @@
 
     <string name="hint_email">Correo electrónico</string>
     <string name="hint_password">Contraseña</string>
+    <string name="hint_password_confirm">Confirmar contraseña</string>
     <string name="action_login">Iniciar sesión</string>
     <string name="action_sign_up">Registrarse</string>
     <string name="action_forgot_password">Olvide mi contraseña</string>
+    <string name="hint_name">Nombre</string>
+    <string name="hint_last_name">Apellido</string>
+    <string name="hint_country">País</string>
+    <string name="hint_state">Estado</string>
+    <string name="hint_city">Ciudad</string>
+
+    <string-array name="gender">
+        <item>Hombre</item>
+        <item>Mujer</item>
+    </string-array>
+
+    <string-array name="country">
+        <item>México</item>
+        <item>Argentina</item>
+    </string-array>
+
+    <string-array name="state">
+        <item>-</item>
+        <item>Nuevo León</item>
+    </string-array>
+
+    <string-array name="education">
+        <item>Primaria</item>
+        <item>Secundaria</item>
+        <item>Preparatoria</item>
+        <item>Licenciatura</item>
+        <item>Posgrado</item>
+    </string-array>
 
     <string name="login_error">Ocurrió un error al iniciar sesión. Intenta de nuevo más tarde</string>
     <string name="invalid_credentials">Email o contraseña incorrecta.</string>
     <string name="iniciando_sesion">Iniciando sesión</string>
+    <string name="registrando">Registrando</string>
     <string name="porfavor_espera">Por favor espera</string>
 
 </resources>

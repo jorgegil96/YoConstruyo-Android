@@ -92,15 +92,6 @@
                     android:gravity="center_horizontal"
                     android:layout_marginTop="15dp"/>
 
-                <TextView
-                    android:id="@+id/text_forgot_password"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/action_forgot_password"
-                    android:textSize="18sp"
-                    android:gravity="center_horizontal"
-                    android:layout_marginTop="10dp"/>
-
             </LinearLayout>
 
         </RelativeLayout>

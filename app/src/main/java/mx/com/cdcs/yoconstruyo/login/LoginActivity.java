@@ -24,6 +24,7 @@ import mx.com.cdcs.yoconstruyo.data.local.AppLocalDataStore;
 import mx.com.cdcs.yoconstruyo.data.local.MySharedPreferences;
 import mx.com.cdcs.yoconstruyo.data.service.YoConstruyoService;
 import mx.com.cdcs.yoconstruyo.main.MainActivity;
+import mx.com.cdcs.yoconstruyo.signup.SignupActivity;
 import mx.com.cdcs.yoconstruyo.util.schedulers.SchedulerProvider;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -34,7 +35,6 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     @BindView(R.id.edit_password) EditText etPassword;
     @BindView(R.id.button_login) Button btnLogin;
     @BindView(R.id.text_sign_up) TextView tvSignUp;
-    @BindView(R.id.text_forgot_password) TextView tvForgotPassword;
     @BindView(R.id.input_layout_email) TextInputLayout tilEmail;
     @BindView(R.id.input_layout_password) TextInputLayout tilPassword;
     @BindView(R.id.progressBar) ProgressBar progressBar;
@@ -71,6 +71,9 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if (loadingDialog.isShowing()) {
+            loadingDialog.dismiss();
+        }
         presenter.stop();
     }
 
@@ -108,5 +111,11 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void startSignUpActivity() {
+        Intent intent = new Intent(this, SignupActivity.class);
+        startActivity(intent);
     }
 }
