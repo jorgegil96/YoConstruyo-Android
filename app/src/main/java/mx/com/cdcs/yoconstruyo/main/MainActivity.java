@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.util.ArrayList;
@@ -96,11 +97,13 @@ public class MainActivity extends AppCompatActivity implements
                 presenter.loadModules();
                 return true;
             case R.id.action_about:
+                new MaterialDialog.Builder(this)
+                        .customView(R.layout.about_layout, false)
+                        .positiveText("Cerrar")
+                        .show();
                 return true;
             case R.id.action_logout:
                 presenter.logout();
-                return true;
-            case R.id.action_licences:
                 return true;
         }
 

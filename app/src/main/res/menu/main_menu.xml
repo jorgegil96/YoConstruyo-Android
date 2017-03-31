@@ -21,9 +21,4 @@
         android:title="@string/action_logout"
         app:showAsAction="never" />
 
-    <item
-        android:id="@+id/action_licences"
-        android:title="@string/action_licences"
-        app:showAsAction="never" />
-
 </menu>

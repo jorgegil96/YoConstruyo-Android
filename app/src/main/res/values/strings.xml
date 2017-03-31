@@ -59,4 +59,10 @@
     <string name="registrando">Registrando</string>
     <string name="porfavor_espera">Por favor espera</string>
 
+    <string name="about_description">
+        CEMEX y el Tecnológico de Monterrey desarrollaron este manual de autoconstrucción en el que,
+        paso a paso y de manera sencilla, se presenta el proceso constructivo completo para llegar a
+        tener una casa terminada y realizada con criterios sostenibles.
+    </string>
+
 </resources>
